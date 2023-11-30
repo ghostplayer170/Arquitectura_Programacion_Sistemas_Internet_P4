@@ -29,10 +29,10 @@ if (!MONGO_URL || !PORT) {
 }
 
 // Conexión a la base de datos MongoDB.
-try{
+try {
   await mongoose.connect(MONGO_URL);
   console.info("Mongo Connected");
-}catch(e){
+} catch (e) {
   console.error(e);
 }
 
@@ -41,6 +41,25 @@ const app = express();
 app.use(express.json());
 
 // Rutas y controladores.
+
+/*
+/worker/:id -> Devolverá el trabajador que corresponde al id
+/business/:id -> Devolverá la empresa que corresponde al id
+/task/id -> Devolverá la tarea que corresponde al id
+/worker/:id -> Eliminará el trabajador que corresponde al id
+/business/:id -> Eliminará la empresa que corresponde al id
+/task/:id -> Eliminará la tarea que corresponde al id
+/worker - > Deberá devolver todos los trabajadores
+/business - > Deberá devolver todas las empresas
+/task- > Deberá devolver todas las tareas
+/worker - > Deberá crear un trabajador
+/business - > Deberá crear una empresa
+/task- > Deberá devolver todas las tareas
+/business/:id/fire/:workerId -> Deberá despedir de la empresa al trabajador que corresponde al id
+/business/:id/hire/:workerId -> Deberá contratar de la empresa al trabajador que corresponde al id
+/task/:id?status=x -> Cambiara el estado de una tarea
+*/
+
 /*
 app
   .post("/api/BancoNebrija/addCliente", addCliente)
