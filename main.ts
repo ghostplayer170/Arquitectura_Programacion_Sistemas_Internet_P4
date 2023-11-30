@@ -19,8 +19,8 @@ import { load } from "https://deno.land/std@0.204.0/dotenv/mod.ts"; // Leer vari
 const env = await load(); // Carga Variables de entorno
 
 // Variables de entorno.
-const MONGO_URL = env.MONGO_URL || Deno.env.get("MONGO_URL") || "mongodb+srv://rmontenegrop:Lllubo6BT2sVncJg@clusteruni.pagju8q.mongodb.net/BaseDatosEmpresaNebrija?retryWrites=true&w=majority";
-const PORT = env.PORT || Deno.env.get("PORT") || 3040;
+const MONGO_URL = env.MONGO_URL || Deno.env.get("MONGO_URL");
+const PORT = env.PORT || Deno.env.get("PORT");
 
 // Verifica variables de entorno.
 if (!MONGO_URL || !PORT) {
