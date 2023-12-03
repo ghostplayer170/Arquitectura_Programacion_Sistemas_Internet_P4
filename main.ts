@@ -13,9 +13,9 @@ import deleteTask from "./resolvers/deleteTask.ts";
 import addWorker from "./resolvers/addWorker.ts";
 import addBusiness from "./resolvers/addBusiness.ts";
 import addTask from "./resolvers/addTask.ts";
-import updateBusinessFire from "./resolvers/updateBusinessFire.ts";
-import updateBusinessHire from "./resolvers/updateBusinessHire.ts";
-import updateTaskState from "./resolvers/updateTaskState.ts";
+//import updateBusinessFire from "./resolvers/updateBusinessFire.ts";
+//import updateBusinessHire from "./resolvers/updateBusinessHire.ts";
+//import updateTaskState from "./resolvers/updateTaskState.ts";
 
 // Importación de función 'load' de Deno para cargar variables de entorno.
 import { load } from "https://deno.land/std@0.204.0/dotenv/mod.ts"; // Leer variables de entorno
@@ -57,9 +57,9 @@ app
   .get("/worker", getAllWorker)
   .get("/business", getAllBusiness)
   .get("/task", getAllTask)
-  .put("/business/:id/fire/:workerId", updateBusinessFire)
-  .put("/business/:id/hire/:workerId", updateBusinessHire)
-  .put("/task/:id?status=x", updateTaskState);
+  //.put("/business/:id/fire/:workerId", updateBusinessFire)
+  //.put("/business/:id/hire/:workerId", updateBusinessHire)
+  //.put("/task/:id?status=x", updateTaskState);
 
 // Iniciar el servidor.
 app.listen(PORT, () => {
