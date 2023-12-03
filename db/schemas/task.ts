@@ -13,7 +13,7 @@ const Schema = mongoose.Schema;
 const TaskSchema = new Schema(
   {
     name: { type: String, required: true },
-    state: { type: State, required: true },
+    state: { type: String, enum: State, required: false, default: State.ToDo },
     workerID: { type: Schema.Types.ObjectId, required: false, ref: "Worker" },
     businessID: { type: Schema.Types.ObjectId, required: true, ref: "Business" },
   },

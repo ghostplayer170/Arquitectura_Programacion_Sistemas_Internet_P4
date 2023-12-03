@@ -1,4 +1,5 @@
 export type Worker = {
+  id: string;
   dni: string;
   name: string;
   email: string;
@@ -8,10 +9,10 @@ export type Worker = {
 
 export type Task = {
   id: string;
-  name: string;
+  description: string;
   state: State;
   worker: Omit<Worker, "business" | "tasks"> | null;
-  business: Omit<Task, "workers" | "tasks"> | null;
+  business: Omit<Business, "workers" | "tasks"> | null;
 };
 
 export type Business = {
@@ -22,8 +23,8 @@ export type Business = {
 };
 
 export enum State {
-  ToDo,
-  InProgress,
-  InTest,
-  Closed,
+  ToDo = 'To Do',
+  InProgress = 'In Progress',
+  InTest = 'In Test',
+  Closed = 'Closed',
 }

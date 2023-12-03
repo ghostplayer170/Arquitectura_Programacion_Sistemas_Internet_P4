@@ -1,18 +1,21 @@
 import express from "npm:express@4.18.2";
 import mongoose from "npm:mongoose@7.6.3";
 
-/*
-import addCliente from "./resolvers/addCliente.ts";
-import addGestor from "./resolvers/addGestor.ts";
-import addHipoteca from "./resolvers/addHipoteca.ts";
-import deleteCliente from "./resolvers/deleteCliente.ts";
-import asignarGestorCliente from "./resolvers/asignarGestorCliente.ts";
-import amortizarHipotecaCliente from "./resolvers/amortizarHipotecaCliente.ts";
-import transaccionParaCliente from "./resolvers/transaccionParaCliente.ts";
-import ingresarDineroCliente from "./resolvers/ingresarDineroCliente.ts";
-import depositDineroClientes from "./tasks/depositDineroClientes.ts";
-import payingCoutasHipotecas from "./tasks/payingCoutasHipotecas.ts";
-*/
+import getWorker from "./resolvers/getWorker.ts";
+import getBusiness from "./resolvers/getBusiness.ts";
+import getTask from "./resolvers/getTask.ts";
+import getAllWorker from "./resolvers/getAllWorker.ts";
+import getAllBusiness from "./resolvers/getAllBusiness.ts";
+import getAllTask from "./resolvers/getAllTask.ts";
+import deleteWorker from "./resolvers/deleteWorker.ts";
+import deleteBusiness from "./resolvers/deleteBusiness.ts";
+import deleteTask from "./resolvers/deleteTask.ts";
+import addWorker from "./resolvers/addWorker.ts";
+import addBusiness from "./resolvers/addBusiness.ts";
+import addTask from "./resolvers/addTask.ts";
+import updateBusinessFire from "./resolvers/updateBusinessFire.ts";
+import updateBusinessHire from "./resolvers/updateBusinessHire.ts";
+import updateTaskState from "./resolvers/updateTaskState.ts";
 
 // Importación de función 'load' de Deno para cargar variables de entorno.
 import { load } from "https://deno.land/std@0.204.0/dotenv/mod.ts"; // Leer variables de entorno
@@ -41,38 +44,22 @@ const app = express();
 app.use(express.json());
 
 // Rutas y controladores.
-
-/*
-/worker/:id -> Devolverá el trabajador que corresponde al id
-/business/:id -> Devolverá la empresa que corresponde al id
-/task/id -> Devolverá la tarea que corresponde al id
-/worker/:id -> Eliminará el trabajador que corresponde al id
-/business/:id -> Eliminará la empresa que corresponde al id
-/task/:id -> Eliminará la tarea que corresponde al id
-/worker - > Deberá devolver todos los trabajadores
-/business - > Deberá devolver todas las empresas
-/task- > Deberá devolver todas las tareas
-/worker - > Deberá crear un trabajador
-/business - > Deberá crear una empresa
-/task- > Deberá devolver todas las tareas
-/business/:id/fire/:workerId -> Deberá despedir de la empresa al trabajador que corresponde al id
-/business/:id/hire/:workerId -> Deberá contratar de la empresa al trabajador que corresponde al id
-/task/:id?status=x -> Cambiara el estado de una tarea
-*/
-
-/*
 app
-  .post("/api/BancoNebrija/addCliente", addCliente)
-  .post("/api/BancoNebrija/addGestor", addGestor)
-  .post("/api/BancoNebrija/addHipoteca", addHipoteca)
-  .delete("/api/BancoNebrija/deleteCliente/:id", deleteCliente)
-  .put("/api/BancoNebrija/asignarGestorCliente/:id", asignarGestorCliente)
-  .put("/api/BancoNebrija/amortizarHipotecaCliente/:id", amortizarHipotecaCliente)
-  .put("/api/BancoNebrija/transaccionParaCliente/:id", transaccionParaCliente)
-  .put("/api/BancoNebrija/ingresarDineroCliente/:id", ingresarDineroCliente);
-*/
-// Ejecutar las funciones cada 5 minutos
-const tiempoEjecucion = 5 * 60 * 1000; // 5 minutos en milisegundos
+  .get("/worker/:id", getWorker)
+  .get("/business/:id", getBusiness)
+  .get("/task/id", getTask)
+  .delete("/worker/:id", deleteWorker)
+  .delete("/business/:id", deleteBusiness)
+  .delete("/task/id", deleteTask)
+  .post("/worker/:id", addWorker)
+  .post("/business/:id", addBusiness)
+  .post("/task/id", addTask)
+  .get("/worker", getAllWorker)
+  .get("/business", getAllBusiness)
+  .get("/task", getAllTask)
+  .put("/business/:id/fire/:workerId", updateBusinessFire)
+  .put("/business/:id/hire/:workerId", updateBusinessHire)
+  .put("/task/:id?status=x", updateTaskState);
 
 // Iniciar el servidor.
 app.listen(PORT, () => {
