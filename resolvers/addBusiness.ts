@@ -6,7 +6,7 @@ import { Business } from "../types.ts";
 import { BusinessModel, BusinessModelType } from "../db/schemas/business.ts";
 
 export const addBusiness = async (
-  req: Request<{}, {}, BusinessModelType>,
+  req: Request,
   res: Response<Business | { error: unknown }>
 ) => {
   try {
