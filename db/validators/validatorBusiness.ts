@@ -6,7 +6,7 @@ BusinessModel.schema.path("tasksIDs").validate(async function (
   tasksIDs: mongoose.Types.ObjectId[],
 ) {
   // Verifica si ha cambiado las tasksIDs
-  if (tasksIDs === this.tasksIDs) {
+  if (JSON.stringify(tasksIDs) === JSON.stringify(this.tasksIDs)) {
     return true;
   }
   try {

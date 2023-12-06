@@ -6,7 +6,7 @@ import { Business } from "../types.ts";
 import { BusinessModel, BusinessModelType } from "../db/schemas/business.ts";
 
 export const addBusiness = async (
-  req: Request,
+  req: Request<{}, {}, BusinessModelType>,
   res: Response<Business | { error: unknown }>
 ) => {
   try {
@@ -16,7 +16,6 @@ export const addBusiness = async (
       workersIDs,
       tasksIDs,
     });
-    console.log(name);
     await Business.save();
     
     res.status(201).json(Business).send();
