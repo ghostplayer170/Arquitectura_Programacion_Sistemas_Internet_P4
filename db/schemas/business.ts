@@ -1,5 +1,9 @@
 import mongoose from "npm:mongoose@7.6.3";
 import { Business } from "../../types.ts";
+import {
+  BusinessPostDelete,
+  BusinessPostSave,
+} from "../middlewares/middlewareBusiness.ts";
 
 export type BusinessModelType =
   & mongoose.Document
@@ -22,15 +26,11 @@ const BusinessSchema = new Schema(
   { timestamps: true },
 );
 
-/*
-BusinessSchema.path("name").validate(
-  globalValidators.nameIsValid,
-  "Name must be between 3 and 50 characters",
+BusinessSchema.post(
+  ["save", "findOneAndUpdate", "updateOne"],
+  BusinessPostSave,
 );
-
-// on delete: update related documents
-BusinessSchema.post("deleteOne", BusinessPostDelete);
-*/
+BusinessSchema.post(['findOneAndDelete'], BusinessPostDelete);
 
 export const BusinessModel = mongoose.model<BusinessModelType>(
   "Business",

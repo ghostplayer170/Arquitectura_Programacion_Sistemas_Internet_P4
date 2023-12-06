@@ -1,51 +1,47 @@
 import mongoose from "npm:mongoose@7.6.3";
-import { TaskModel } from "../schemas/task.ts";
-import { WorkerModel } from "../schemas/worker.ts";
+import { BusinessModel } from "../schemas/business.ts";
 
 // Validar que todas las tareas con los IDs dados existen
-const tasksExists = async (
+BusinessModel.schema.path("tasksIDs").validate(async function (
   tasksIDs: mongoose.Types.ObjectId[],
-): Promise<boolean> => {
+) {
+  // Verifica si ha cambiado las tasksIDs
+  if (tasksIDs === this.tasksIDs) {
+    return true;
+  }
   try {
-    const tasksCount = await TaskModel.countDocuments({
+    const tasksCount = await mongoose.models.Task.countDocuments({
       _id: { $in: tasksIDs },
     });
-    return tasksCount === tasksIDs.length;
+    if (tasksCount !== tasksIDs.length) {
+      throw new Error(`Tasks id founded ${tasksCount}, some Tasks not exists`);
+    }
+    return true;
   } catch (_e) {
     return false;
   }
-};
+});
 
-// Validar que todas las tareas con los IDs dados existen
-const workersExists = async (
-  WorkersIDs: mongoose.Types.ObjectId[],
-): Promise<boolean> => {
-  try {
-    const WorkersCount = await WorkerModel.countDocuments({
-      _id: { $in: WorkersIDs },
-    });
-    return WorkersCount === WorkersIDs.length;
-  } catch (_e) {
-    return false;
-  }
-};
-
-// Validar que el número total no excede 10
-const workersMax = async (
+// Validar que todas los trabajadores con los IDs dados existen y que el número total no excede 10
+BusinessModel.schema.path("workersIDs").validate(async function (
   workersIDs: mongoose.Types.ObjectId[],
-): Promise<boolean> => {
+) {
+  // Verifica si han cambiado las workersIDs
+  if (JSON.stringify(workersIDs) === JSON.stringify(this.workersIDs)) {
+    return true;
+  }
   try {
-    const workersCount = await WorkerModel.countDocuments({
+    const workersCount = await mongoose.models.Worker.countDocuments({
       _id: { $in: workersIDs },
     });
-    return workersCount <= 10;
+    if (workersCount !== workersIDs.length) {
+      throw new Error("Some workers do not exist");
+    }
+    if (workersCount > 10) {
+      throw new Error("Business can only have a maximum of 10 workers");
+    }
+    return true;
   } catch (_e) {
     return false;
   }
-};
-
-export const validatorsBusiness = {
-  workersExists,
-  tasksExists,
-  workersMax,
-};
+});

@@ -1,6 +1,7 @@
 import mongoose from "npm:mongoose@7.6.3";
 import { Task } from "../../types.ts";
 import { State } from "../../types.ts";
+import { TaskPostDelete, TaskPostSave } from "../middlewares/middlewareTask.ts";
 
 export type TaskModelType =
   & mongoose.Document
@@ -15,20 +16,20 @@ const TaskSchema = new Schema(
     description: { type: String, required: true },
     state: { type: String, enum: State, required: false, default: State.ToDo },
     workerID: { type: Schema.Types.ObjectId, required: false, ref: "Worker" },
-    businessID: { type: Schema.Types.ObjectId, required: true, ref: "Business" },
+    businessID: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "Business",
+    },
   },
   { timestamps: true },
 );
 
-/*
-TaskSchema.path("name").validate(
-  globalValidators.nameIsValid,
-  "Name must be between 3 and 50 characters",
+TaskSchema.post(
+  ["save", "findOneAndUpdate", "updateOne"],
+  TaskPostSave,
 );
-
-// on delete: update related documents
-TaskSchema.post("deleteOne", TaskPostDelete);
-*/
+TaskSchema.post(["findOneAndDelete"], TaskPostDelete);
 
 export const TaskModel = mongoose.model<TaskModelType>(
   "Task",

@@ -1,5 +1,6 @@
 import mongoose from "npm:mongoose@7.6.3";
 import { Worker } from "../../types.ts";
+import { WorkerPostDelete, WorkerPostSave } from "../middlewares/middlewareWorker.ts";
 
 export type WorkerModelType =
   & mongoose.Document
@@ -26,15 +27,11 @@ const WorkerSchema = new Schema(
   { timestamps: true },
 );
 
-/*
-WorkerSchema.path("name").validate(
-  globalValidators.nameIsValid,
-  "Name must be between 3 and 50 characters",
+WorkerSchema.post(
+  ["save", "findOneAndUpdate", "updateOne"],
+  WorkerPostSave,
 );
-
-// on delete: update related documents
-WorkerSchema.post("deleteOne", WorkerPostDelete);
-*/
+WorkerSchema.post(["findOneAndDelete"], WorkerPostDelete);
 
 export const WorkerModel = mongoose.model<WorkerModelType>(
   "Worker",

@@ -1,32 +1,40 @@
 import mongoose from "npm:mongoose@7.6.3";
-import { WorkerModel } from "../schemas/worker.ts";
-import { BusinessModel } from "../schemas/business.ts";
+import { TaskModel } from "../schemas/task.ts";
 
-// Validate that a Worker with the given ID exists in the database
-const workerExists = async (
-  workerID: mongoose.Types.ObjectId,
-): Promise<boolean> => {
+// Validar que el workerID exists
+TaskModel.schema.path("workerID").validate(async function (
+  value: mongoose.Types.ObjectId,
+) {
+  // Verifica si ha cambiado el workerID
+  if (value === this.workerID) {
+    return true;
+  }
   try {
-    const worker = await WorkerModel.findById(workerID);
-    return !!worker; // Convertir el resultado a un booleano (true si el trabajador existe, false si no)
+    const worker = await mongoose.models.Worker.findById(value);
+    if (!worker) {
+      throw new Error(`Worker with id ${value} does not exist`);
+    }
+    return true;
   } catch (_e) {
     return false;
   }
-};
+});
 
-// Validate that a business with the given ID exists in the database
-const businessExists = async (
-  businessID: mongoose.Types.ObjectId,
-): Promise<boolean> => {
+// Validar que el businessID exists
+TaskModel.schema.path("businessID").validate(async function (
+  value: mongoose.Types.ObjectId,
+) {
+  // Verifica si ha cambiado el businessID
+  if (value === this.businessID) {
+    return true;
+  }
   try {
-    const business = await BusinessModel.findById(businessID);
-    return !!business; // Convertir el resultado a un booleano
+    const business = await mongoose.models.Business.findById(value);
+    if (!business) {
+      throw new Error(`Business with id ${value} does not exist`);
+    }
+    return true;
   } catch (_e) {
     return false;
   }
-};
-
-export const validatorsTask = {
-  workerExists,
-  businessExists,
-};
+});
