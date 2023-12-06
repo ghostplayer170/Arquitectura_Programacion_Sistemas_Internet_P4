@@ -15,7 +15,7 @@ const TaskSchema = new Schema(
   {
     description: { type: String, required: true },
     state: { type: String, enum: State, required: false, default: State.ToDo },
-    workerID: { type: Schema.Types.ObjectId, required: false, ref: "Worker" },
+    workerID: { type: Schema.Types.ObjectId, required: true, ref: "Worker" },
     businessID: {
       type: Schema.Types.ObjectId,
       required: true,
