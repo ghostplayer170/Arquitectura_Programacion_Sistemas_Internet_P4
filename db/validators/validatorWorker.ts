@@ -58,3 +58,22 @@ WorkerModel.schema.path("businessID").validate(async function (
     return false;
   }
 });
+
+// Validar que el 
+WorkerModel.schema.path("dni").validate(async function (
+  value: string,
+) {
+  // Verifica si ha cambiado el 
+  if (value === this.dni) {
+    return true;
+  }
+  try {
+    const worker = await WorkerModel.findOne({dni: value}).exec();
+    if (!worker) {
+      throw new Error(`Worker with dni ${value} exist`);
+    }
+    return true;
+  } catch (_e) {
+    return false;
+  }
+});

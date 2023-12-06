@@ -19,7 +19,7 @@ export const addTask = async (
       businessID,
     });
     await Task.save();
-    res.status(201).json(Task).send();
+    res.status(200).json(Task).send();
   } catch (error) {
     res.status(500).send(error);
   }

@@ -14,7 +14,6 @@ export const getWorker = async (
   try {
     const worker = await WorkerModel.findById(id)
     .populate("business")
-    .populate("tasks")
     .exec();
     if (!worker) {
       res.status(404).send({ error: "Worker not found" });

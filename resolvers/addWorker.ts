@@ -19,7 +19,7 @@ export const addWorker = async (
       tasksIDs,
     });
     await Worker.save();
-    res.status(201).json(Worker).send();
+    res.status(200).json(Worker).send();
   } catch (error) {
     res.status(500).send(error);
   }
