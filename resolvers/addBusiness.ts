@@ -16,8 +16,9 @@ export const addBusiness = async (
       workersIDs,
       tasksIDs,
     });
-    await Business.save();
     console.log(name);
+    await Business.save();
+    
     res.status(201).json(Business).send();
   } catch (error) {
     res.status(500).send(error);
