@@ -17,9 +17,9 @@ export const addBusiness = async (
       tasksIDs,
     });
     await Business.save();
-    res.status(201).json(Business).send();
+    res.status(200).json(Business).send();
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send("Renato");
   }
 };
 
