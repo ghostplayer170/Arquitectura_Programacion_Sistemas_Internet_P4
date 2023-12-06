@@ -9,13 +9,17 @@ export const deleteBusiness = async (
   req: Request<{ id: string }, {}>,
   res: Response<string | { error: unknown }>,
 ) => {
-  const id = req.params.id;
-  const Business = await BusinessModel.findByIdAndDelete(id).exec();
-  if (!Business) {
-    res.status(404).send({ error: "Business not found" });
-    return;
+  try {
+    const id = req.params.id;
+    const Business = await BusinessModel.findByIdAndDelete(id).exec();
+    if (!Business) {
+      res.status(404).send({ error: "Business not found" });
+      return;
+    }
+    res.status(200).send("Business deleted");
+  } catch (error) {
+    res.status(500).send(error);
   }
-  res.status(200).send("Business deleted");
-}
+};
 
 export default deleteBusiness;

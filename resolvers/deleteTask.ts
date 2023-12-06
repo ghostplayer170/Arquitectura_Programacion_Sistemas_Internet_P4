@@ -9,13 +9,17 @@ export const deleteTask = async (
   req: Request<{ id: string }, {}>,
   res: Response<string | { error: unknown }>,
 ) => {
-  const id = req.params.id;
-  const Task = await TaskModel.findByIdAndDelete(id).exec();
-  if (!Task) {
-    res.status(404).send({ error: "Task not found" });
-    return;
+  try {
+    const id = req.params.id;
+    const Task = await TaskModel.findByIdAndDelete(id).exec();
+    if (!Task) {
+      res.status(404).send({ error: "Task not found" });
+      return;
+    }
+    res.status(200).send("Task deleted");
+  } catch (error) {
+    res.status(500).send(error);
   }
-  res.status(200).send("Task deleted");
 };
 
 export default deleteTask;

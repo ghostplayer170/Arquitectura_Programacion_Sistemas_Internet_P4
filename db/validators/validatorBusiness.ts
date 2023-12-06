@@ -45,3 +45,22 @@ BusinessModel.schema.path("workersIDs").validate(async function (
     return false;
   }
 });
+
+// Validar que el 
+BusinessModel.schema.path("name").validate(async function (
+  value: string,
+) {
+  // Verifica si ha cambiado el 
+  if (value === this.name) {
+    return true;
+  }
+  try {
+    const worker = await BusinessModel.findOne({name: value}).exec();
+    if (!worker) {
+      throw new Error(`Worker with name ${value} exist`);
+    }
+    return true;
+  } catch (_e) {
+    return false;
+  }
+});
