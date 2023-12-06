@@ -25,13 +25,13 @@ const BusinessSchema = new Schema(
   },
   { timestamps: true },
 );
-
+/*
 BusinessSchema.post(
   ["save", "findOneAndUpdate", "updateOne"],
   BusinessPostSave,
 );
 BusinessSchema.post(['findOneAndDelete'], BusinessPostDelete);
-
+*/
 export const BusinessModel = mongoose.model<BusinessModelType>(
   "Business",
   BusinessSchema,
