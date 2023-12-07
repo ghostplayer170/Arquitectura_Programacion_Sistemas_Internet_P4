@@ -12,7 +12,7 @@ const Schema = mongoose.Schema;
 
 const WorkerSchema = new Schema(
   {
-    dni: { type: String, required: true },
+    dni: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     email: { type: String, required: true },
     businessID: {

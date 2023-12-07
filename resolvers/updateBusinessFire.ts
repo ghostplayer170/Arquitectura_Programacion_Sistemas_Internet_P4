@@ -5,11 +5,11 @@ import { WorkerModel } from "../db/schemas/worker.ts";
 import { fireWorkerMiddleware } from "../db/middlewares/middlewareBusiness.ts";
 
 export const updateBusinessFire = async (
-  req: Request<{ id: string; workerId: string }>,
+  req: Request<{ id: string, workerId: string }>,
   res: Response<Business | { error: unknown }>,
 ) => {
   const id = req.params.id;
-  const workerId: string = req.params.workerId;
+  const workerId = req.params.workerId;
   try {
     const Worker = await WorkerModel.findById(workerId).exec();
     if(!Worker){
