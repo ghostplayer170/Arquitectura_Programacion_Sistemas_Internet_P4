@@ -1,5 +1,5 @@
 import { Request, Response } from "npm:express@4.18.2";
-import { Task } from "../types.ts";
+import { State, Task } from "../types.ts";
 import { TaskModel } from "../db/schemas/task.ts";
 
 export const updateTaskState = async (
@@ -19,7 +19,12 @@ export const updateTaskState = async (
       return;
     }
     await task.save();
-    res.status(200).json(task).send();
+    if(newStatus !== State.Closed){
+      res.status(200).json(task).send();
+    }else{
+      res.status(200).send("Task deleted, because state equals to Closed");
+    }
+    
   } catch (error) {
     res.status(500).send(error);
   }
