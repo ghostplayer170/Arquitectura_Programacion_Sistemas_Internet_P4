@@ -3,7 +3,6 @@ import { Business } from "../../types.ts";
 import {
   BusinessPostDelete,
   BusinessPostSave,
-  BusinessPreSave,
 } from "../middlewares/middlewareBusiness.ts";
 
 export type BusinessModelType =
@@ -31,7 +30,7 @@ BusinessSchema.post(
   ["save", "findOneAndUpdate", "updateOne"],
   BusinessPostSave,
 );
-BusinessSchema.post(['findOneAndDelete'], BusinessPostDelete);
+BusinessSchema.post(["findOneAndDelete"], BusinessPostDelete);
 
 BusinessSchema.pre("save", async function (next) {
   const doc = this as BusinessModelType; // Acceder al documento que se va a guardar

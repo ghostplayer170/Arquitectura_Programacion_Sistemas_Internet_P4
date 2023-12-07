@@ -17,7 +17,7 @@ const WorkerSchema = new Schema(
     email: { type: String, required: true },
     businessID: {
       type: Schema.Types.ObjectId,
-      required: true,
+      required: false,
       ref: "Business",
     },
     tasksIDs: [

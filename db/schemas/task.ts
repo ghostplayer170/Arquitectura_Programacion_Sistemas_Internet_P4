@@ -31,6 +31,14 @@ TaskSchema.post(
 );
 TaskSchema.post(["findOneAndDelete"], TaskPostDelete);
 
+TaskSchema.pre(["save", "findOneAndUpdate", "updateOne"], function (next) {
+  const doc = this as unknown as TaskModelType;
+  if (!Object.values(State).includes(doc.state as State)) {
+    throw new Error("Invalid status provided");
+  }
+  next();
+});
+
 export const TaskModel = mongoose.model<TaskModelType>(
   "Task",
   TaskSchema,

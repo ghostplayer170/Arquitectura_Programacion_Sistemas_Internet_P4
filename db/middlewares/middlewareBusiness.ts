@@ -47,3 +47,18 @@ export const BusinessPostDelete = async function (doc: BusinessModelType) {
     }
   }
 };
+
+export const fireWorkerMiddleware = async function (
+  doc: BusinessModelType,
+  workerId: string,
+) {
+  try {
+    await WorkerModel.updateOne({ _id: workerId, BusinessID: doc._id }, {
+      BusinesssID: null,
+    });
+  } catch (error) {
+    // Manejo de errores
+    console.error(error);
+    throw new Error("Error al despedir al trabajador");
+  }
+};
