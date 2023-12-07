@@ -15,7 +15,7 @@ export const updateBusinessHire = async (
       res.status(404).send({ error: "Worker not found" });
       return;
     }
-    const Business = await BusinessModel.findOneAndUpdate(
+    const Business = await BusinessModel.findByIdAndUpdate(
       id,
       { $push: { workersIDs: workerId } },
       { new: true, runValidators: true },

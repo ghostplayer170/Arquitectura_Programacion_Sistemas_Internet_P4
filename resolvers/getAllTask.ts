@@ -11,7 +11,10 @@ export const getAllTask = async (
   res: Response<Task[] | { error: unknown }>,
 ) => {
   try {
-    const Task = await TaskModel.find({}).exec();
+    const Task = await TaskModel.find({})
+    .populate({ path: 'workerID'})
+    .populate({ path: 'businessID'})
+    .exec();
     if (!Task) {
       res.status(404).send({ error: "Task not found" });
       return;

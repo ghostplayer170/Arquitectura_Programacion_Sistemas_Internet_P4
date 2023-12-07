@@ -11,7 +11,10 @@ export const getAllWorker = async (
   res: Response<Worker[] | { error: unknown }>,
 ) => {
   try {
-    const Worker = await WorkerModel.find({}).exec();
+    const Worker = await WorkerModel.find({})
+    .populate({ path: 'businessID'})
+    .populate({ path: 'tasksIDs'})
+    .exec();
     if (!Worker) {
       res.status(404).send({ error: "Worker not found" });
       return;

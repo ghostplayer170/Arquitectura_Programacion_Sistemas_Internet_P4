@@ -12,7 +12,10 @@ export const getTask = async (
 ) => {
   const id = req.params.id;
   try {
-    const Task = await TaskModel.findById(id).exec();
+    const Task = await TaskModel.findById(id)
+    .populate({ path: 'workerID'})
+    .populate({ path: 'businessID'})
+    .exec();
     if (!Task) {
       res.status(404).send({ error: "Task not found" });
       return;
