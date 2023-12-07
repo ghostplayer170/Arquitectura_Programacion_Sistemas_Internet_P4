@@ -28,7 +28,7 @@ const TaskSchema = new Schema(
 
 TaskSchema.post(["save"], TaskPostSave);
 TaskSchema.post(["findOneAndDelete"], TaskPostDelete);
-TaskSchema.pre("findOneAndUpdate", async function (next) {
+TaskSchema.pre("save", async function (next) {
   const doc = this as unknown as TaskModelType;
   if (doc.state === State.Closed) {
     try {

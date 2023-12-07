@@ -2,7 +2,7 @@ import mongoose from "npm:mongoose@7.6.3";
 import { WorkerModel } from "../schemas/worker.ts";
 
 // Valida si el correo electrónico tiene el formato *@*.*
-WorkerModel.schema.path("email").validate(async function (
+WorkerModel.schema.path("email").validate(function (
   email: string,
 ) {
   // Verifica si ha cambiado el email
