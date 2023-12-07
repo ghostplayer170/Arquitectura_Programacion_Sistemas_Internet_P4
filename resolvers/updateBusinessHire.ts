@@ -16,17 +16,15 @@ export const updateBusinessHire = async (
       return;
     }
     const Business = await BusinessModel.findOneAndUpdate(
-      { _id: id },
+      id,
       { $push: { workersIDs: workerId } },
       { new: true, runValidators: true },
     );
-    if(Business){
-      await Business.save();
-    }
     if (!Business) {
       res.status(404).send({ error: "Business not found" });
       return;
     }
+    await Business.save();
     res.status(200).json(Business).send();
   } catch (error) {
     res.status(500).send(error);
