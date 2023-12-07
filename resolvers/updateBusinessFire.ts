@@ -11,7 +11,9 @@ export const updateBusinessFire = async (
   const id = req.params.id;
   const workerId = req.params.workerId;
   try {
+    console.log(workerId)
     const Worker = await WorkerModel.findById(workerId).exec();
+    console.log(Worker)
     if(!Worker){
         res.status(404).send({ error: "Worker not found" });
         return;
