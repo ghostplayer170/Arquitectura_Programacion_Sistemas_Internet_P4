@@ -27,7 +27,7 @@ const WorkerSchema = new Schema(
 );
 
 WorkerSchema.post(
-  ["save", "findOneAndUpdate", "updateOne"],
+  ["save"],
   WorkerPostSave,
 );
 WorkerSchema.post(["findOneAndDelete"], WorkerPostDelete);

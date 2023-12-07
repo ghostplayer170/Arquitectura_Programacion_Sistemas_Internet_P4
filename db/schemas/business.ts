@@ -23,7 +23,7 @@ const BusinessSchema = new Schema(
 );
 
 BusinessSchema.post(
-  ["save", "findOneAndUpdate", "updateOne"],
+  ["save"],
   BusinessPostSave,
 );
 BusinessSchema.post(["findOneAndDelete"], BusinessPostDelete);

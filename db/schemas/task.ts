@@ -25,7 +25,7 @@ const TaskSchema = new Schema(
 );
 
 TaskSchema.post(
-  ["save", "findOneAndUpdate", "updateOne"],
+  ["save"],
   TaskPostSave,
 );
 TaskSchema.post(["findOneAndDelete"], TaskPostDelete);
