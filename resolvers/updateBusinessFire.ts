@@ -2,7 +2,6 @@ import { Request, Response } from "npm:express@4.18.2";
 import { BusinessModel } from "../db/schemas/business.ts";
 import { Business } from "../types.ts";
 import { WorkerModel } from "../db/schemas/worker.ts";
-import { fireWorkerMiddleware } from "../db/middlewares/middlewareBusiness.ts";
 
 export const updateBusinessFire = async (
   req: Request,
