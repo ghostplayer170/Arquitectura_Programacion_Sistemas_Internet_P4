@@ -3,7 +3,7 @@ import { Task } from "../types.ts";
 import { TaskModel } from "../db/schemas/task.ts";
 
 export const updateTaskState = async (
-  req: Request<{ id: string }>,
+  req: Request,
   res: Response<Task | { error: unknown }>,
 ) => {
   const id = req.params.id; // El parámetro obligatorio :id
