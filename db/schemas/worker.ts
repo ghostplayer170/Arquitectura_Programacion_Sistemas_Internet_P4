@@ -19,6 +19,7 @@ const WorkerSchema = new Schema(
       type: Schema.Types.ObjectId,
       required: false,
       ref: "Business",
+      default: null,
     },
     tasksIDs: [
       { type: Schema.Types.ObjectId, required: false, ref: "Task" },

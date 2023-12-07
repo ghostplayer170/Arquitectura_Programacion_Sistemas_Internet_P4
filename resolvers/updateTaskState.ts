@@ -19,12 +19,11 @@ export const updateTaskState = async (
       return;
     }
     await task.save();
-    if(newStatus !== State.Closed){
+    if (newStatus !== State.Closed) {
       res.status(200).json(task).send();
-    }else{
+    } else {
       res.status(200).send("Task deleted, because state equals to Closed");
     }
-    
   } catch (error) {
     res.status(500).send(error);
   }

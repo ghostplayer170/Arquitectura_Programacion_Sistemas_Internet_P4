@@ -26,7 +26,7 @@ BusinessSchema.post(
   ["save"],
   BusinessPostSave,
 );
-BusinessSchema.pre('save', async function(next) {
+BusinessSchema.pre("save", async function(next) {
   const doc = this as unknown as BusinessModelType;; // El documento actual que se va a guardar
   try {
     if (doc.isModified('workersIDs') && doc.workersIDs.length) {      
