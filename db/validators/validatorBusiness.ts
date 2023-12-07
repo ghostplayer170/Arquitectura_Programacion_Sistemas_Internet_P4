@@ -55,9 +55,9 @@ BusinessModel.schema.path("name").validate(async function (
     return true;
   }
   try {
-    const worker = await BusinessModel.findOne({name: value}).exec();
-    if (!worker) {
-      throw new Error(`Worker with name ${value} exist`);
+    const Business = await BusinessModel.findOne({name: value}).exec();
+    if (Business) {
+      throw new Error(`Business with name ${value} exist`);
     }
     return true;
   } catch (_e) {
