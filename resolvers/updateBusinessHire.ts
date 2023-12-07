@@ -11,12 +11,12 @@ export const updateBusinessHire = async (
   const workerId = req.params.workerId;
   try {
     const Worker = await WorkerModel.findById(workerId).exec();
-    if(!Worker){
-        res.status(404).send({ error: "Worker not found" });
-        return;
+    if (!Worker) {
+      res.status(404).send({ error: "Worker not found" });
+      return;
     }
-    const Business = await BusinessModel.findByIdAndUpdate(
-      id,
+    const Business = await BusinessModel.findOneAndUpdate(
+      { _id: id },
       { $push: { workersIDs: workerId } },
       { new: true, runValidators: true },
     );

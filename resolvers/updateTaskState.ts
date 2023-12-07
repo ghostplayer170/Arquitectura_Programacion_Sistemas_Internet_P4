@@ -10,8 +10,8 @@ export const updateTaskState = async (
   const newStatus = req.query.status; // El parámetro opcional status obtenido de la query
   console.log(newStatus)
   try {
-    const task = await TaskModel.findByIdAndUpdate(
-      id,
+    const task = await TaskModel.findOneAndUpdate(
+      { _id: id },
       { state: newStatus },
       { new: true },
     );
