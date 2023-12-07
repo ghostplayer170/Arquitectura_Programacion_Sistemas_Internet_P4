@@ -9,7 +9,7 @@ WorkerModel.schema.path("email").validate(function (
   if (email === this.email) {
     return true;
   }
-  const emailRegex = /^[a-zA-Z0-9_.]+@[a-zA-Z0-9_.]+\.[^a-zA-Z0-9_.]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if(!emailRegex.test(email)){
     throw new Error(`Email has to be like this: \"name@domain.es\" or \"name123@business.com\"`);
   }

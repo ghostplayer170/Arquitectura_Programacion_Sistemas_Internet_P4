@@ -19,11 +19,6 @@ export const BusinessPostSave = async function (doc: BusinessModelType) {
         { _id: { $in: doc.workersIDs } },
         { BusinesssID: doc._id },
       );
-      // Encuentra todos los workers cuyos IDs no estén en la lista doc.workersIDs
-      await WorkerModel.updateMany(
-        { _id: { $nin: doc.workersIDs }, businessID: doc._id },
-        { $set: { businessID: null } }, // Establece el campo businessID a null
-      );
     } catch (_e) {
       console.log(_e);
     }

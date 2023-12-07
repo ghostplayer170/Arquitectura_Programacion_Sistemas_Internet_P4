@@ -26,10 +26,21 @@ BusinessSchema.post(
   ["save"],
   BusinessPostSave,
 );
-BusinessSchema.post(
-  ["findOneAndUpdate"],
-  BusinessPostSave,
-);
+BusinessSchema.pre('save', async function(next) {
+  const doc = this as unknown as BusinessModelType;; // El documento actual que se va a guardar
+  try {
+    if (doc.isModified('workersIDs') && doc.workersIDs.length) {      
+      // Encuentra todos los workers cuyos IDs no estén en la lista doc.workersIDs
+      await mongoose.models.Worker.updateMany(
+        { _id: { $nin: doc.workersIDs }, businessID: doc._id },
+        { $set: { businessID: null } }, // Establece el campo businessID a null
+      );
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 BusinessSchema.post(["findOneAndDelete"], BusinessPostDelete);
 
 export const BusinessModel = mongoose.model<BusinessModelType>(
