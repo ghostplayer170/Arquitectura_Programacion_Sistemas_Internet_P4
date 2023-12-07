@@ -20,6 +20,9 @@ export const updateBusinessHire = async (
       { $push: { workersIDs: workerId } },
       { new: true, runValidators: true },
     );
+    if(Business){
+      await Business.save();
+    }
     if (!Business) {
       res.status(404).send({ error: "Business not found" });
       return;
