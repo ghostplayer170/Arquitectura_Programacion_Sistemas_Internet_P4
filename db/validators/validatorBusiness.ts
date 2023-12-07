@@ -45,18 +45,3 @@ BusinessModel.schema.path("workersIDs").validate(async function (
     return false;
   }
 });
-
-// Validar que el 
-BusinessModel.schema.path("name").validate(async function (
-  name: string,
-) {
-  try {
-    const Business = await BusinessModel.findOne({name}).exec();
-    if (Business) {
-      throw new Error(`Business with name ${name} exist`);
-    }
-    return true;
-  } catch (_e) {
-    return false;
-  }
-});

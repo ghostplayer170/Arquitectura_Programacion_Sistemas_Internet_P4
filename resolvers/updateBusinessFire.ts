@@ -11,17 +11,16 @@ export const updateBusinessFire = async (
   const id = req.params.id;
   const workerId = req.params.workerId;
   try {
-    const Worker = await WorkerModel.findById(workerId);
-    console.log(Worker)
+    const Worker = await WorkerModel.findById(workerId).exec();
     if(!Worker){
         res.status(404).send({ error: "Worker not found" });
         return;
     }
-    const Business = await BusinessModel.findById(id);
-    if (Business) {
-        // Pasar la instancia de la empresa y el ID del trabajador al middleware
-        await fireWorkerMiddleware(Business, workerId); 
-    }
+    const Business = await BusinessModel.findByIdAndUpdate(
+      id,
+      { $pull: { workersIDs: workerId } },
+      { new: true, runValidators: true },
+    );
     if (!Business) {
       res.status(404).send({ error: "Business not found" });
       return;

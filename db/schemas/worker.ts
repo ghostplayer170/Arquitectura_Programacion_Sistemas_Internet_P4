@@ -24,7 +24,6 @@ const WorkerSchema = new Schema(
       { type: Schema.Types.ObjectId, required: false, ref: "Task" },
     ],
   },
-  { timestamps: true },
 );
 
 WorkerSchema.post(

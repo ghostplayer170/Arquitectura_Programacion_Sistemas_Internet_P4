@@ -23,7 +23,6 @@ const BusinessSchema = new Schema(
       { type: Schema.Types.ObjectId, required: false, ref: "Task" },
     ],
   },
-  { timestamps: true },
 );
 
 BusinessSchema.post(

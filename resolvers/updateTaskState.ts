@@ -8,6 +8,7 @@ export const updateTaskState = async (
 ) => {
   const id = req.params.id; // El parámetro obligatorio :id
   const newStatus = req.query.status; // El parámetro opcional status obtenido de la query
+  console.log(newStatus)
   try {
     const task = await TaskModel.findByIdAndUpdate(
       id,
