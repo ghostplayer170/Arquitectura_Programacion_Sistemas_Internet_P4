@@ -5,14 +5,13 @@ import { WorkerModel } from "../db/schemas/worker.ts";
 import { fireWorkerMiddleware } from "../db/middlewares/middlewareBusiness.ts";
 
 export const updateBusinessFire = async (
-  req: Request<{ id: string, workerId: string }>,
+  req: Request,
   res: Response<Business | { error: unknown }>,
 ) => {
   const id = req.params.id;
   const workerId = req.params.workerId;
   try {
-    console.log(workerId)
-    const Worker = await WorkerModel.findById(workerId).exec();
+    const Worker = await WorkerModel.findById(workerId);
     console.log(Worker)
     if(!Worker){
         res.status(404).send({ error: "Worker not found" });

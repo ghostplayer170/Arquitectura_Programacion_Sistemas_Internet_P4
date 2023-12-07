@@ -3,7 +3,7 @@ import { TaskModel } from "../schemas/task.ts";
 import { WorkerModelType } from "../schemas/worker.ts";
 
 export const WorkerPostSave = async function (doc: WorkerModelType) {
-  if (doc.tasksIDs.length) {
+  if (doc.tasksIDs && doc.tasksIDs.length) {
     try {
       await TaskModel.updateMany(
         { _id: { $in: doc.tasksIDs } },
@@ -26,7 +26,7 @@ export const WorkerPostSave = async function (doc: WorkerModelType) {
 };
 
 export const WorkerPostDelete = async function (doc: WorkerModelType) {
-  if (doc.tasksIDs.length) {
+  if (doc.tasksIDs && doc.tasksIDs.length) {
     try {
       await TaskModel.updateMany(
         { _id: { $in: doc.tasksIDs } },
