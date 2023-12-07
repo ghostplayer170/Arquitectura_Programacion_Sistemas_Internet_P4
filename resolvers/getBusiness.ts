@@ -12,12 +12,15 @@ export const getBusiness = async (
 ) => {
   const id = req.params.id;
   try {
-    const Business = await BusinessModel.findById(id).populate('workersIDs','tasksIDs').exec();
+    const Business = await BusinessModel.findById(id)
+    .populate({ path: 'workersIDs', select: 'name' })
+    .populate({ path: 'tasksIDs', select: 'description' })
+    .exec();
     if (!Business) {
       res.status(404).send({ error: "Business not found" });
       return;
     }
-    res.status(200).json(Business).send();
+    res.status(200).json(Business);
   } catch (error) {
     res.status(500).send(error);
   }
