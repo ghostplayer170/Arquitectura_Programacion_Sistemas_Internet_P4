@@ -17,7 +17,7 @@ export const updateBusinessFire = async (
     }
     const Business = await BusinessModel.findOneAndUpdate(
       { _id: id },
-      { $pull: { worFkersIDs: workerId } },
+      { $pull: { workersIDs: workerId } },
       { new: true, runValidators: true },
     );
     if(Business){
