@@ -30,6 +30,10 @@ WorkerSchema.post(
   ["save"],
   WorkerPostSave,
 );
+WorkerSchema.post(
+  ["findOneAndUpdate"],
+  WorkerPostSave,
+);
 WorkerSchema.post(["findOneAndDelete"], WorkerPostDelete);
 
 export const WorkerModel = mongoose.model<WorkerModelType>(

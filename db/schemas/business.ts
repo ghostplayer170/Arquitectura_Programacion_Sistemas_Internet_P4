@@ -26,6 +26,10 @@ BusinessSchema.post(
   ["save"],
   BusinessPostSave,
 );
+BusinessSchema.post(
+  ["findOneAndUpdate"],
+  BusinessPostSave,
+);
 BusinessSchema.post(["findOneAndDelete"], BusinessPostDelete);
 
 export const BusinessModel = mongoose.model<BusinessModelType>(

@@ -1,6 +1,7 @@
 import { BusinessModel } from "../schemas/business.ts";
 import { TaskModelType } from "../schemas/task.ts";
 import { WorkerModel } from "../schemas/worker.ts";
+import { validatorsTask } from "../validators/validatorTask.ts";
 
 export const TaskPostSave = async function (doc: TaskModelType) {
   if (doc.workerID) {
