@@ -1,6 +1,9 @@
 import mongoose from "npm:mongoose@7.6.3";
 import { Business } from "../../types.ts";
-import { BusinessPostDelete, BusinessPostSave } from "../middlewares/middlewareBusiness.ts";
+import {
+  BusinessPostDelete,
+  BusinessPostSave,
+} from "../middlewares/middlewareBusiness.ts";
 
 export type BusinessModelType =
   & mongoose.Document
@@ -22,14 +25,11 @@ const BusinessSchema = new Schema(
   },
 );
 
-BusinessSchema.post(
-  ["save"],
-  BusinessPostSave,
-);
-BusinessSchema.pre("save", async function(next) {
-  const doc = this as unknown as BusinessModelType;; // El documento actual que se va a guardar
+BusinessSchema.post("save", BusinessPostSave);
+BusinessSchema.pre("save", async function (next) {
+  const doc = this as unknown as BusinessModelType;// El documento actual que se va a guardar
   try {
-    if (doc.isModified('workersIDs') && doc.workersIDs.length) {      
+    if (doc.isModified("workersIDs") && doc.workersIDs.length) {
       // Encuentra todos los workers cuyos IDs no estén en la lista doc.workersIDs
       await mongoose.models.Worker.updateMany(
         { _id: { $nin: doc.workersIDs }, businessID: doc._id },
@@ -41,7 +41,7 @@ BusinessSchema.pre("save", async function(next) {
     next(error);
   }
 });
-BusinessSchema.post(["findOneAndDelete"], BusinessPostDelete);
+BusinessSchema.post("findOneAndDelete", BusinessPostDelete);
 
 export const BusinessModel = mongoose.model<BusinessModelType>(
   "Business",

@@ -5,7 +5,6 @@ import { Request, Response } from "npm:express@4.18.2";
 import { BusinessModel } from "../db/schemas/business.ts";
 import { Business } from "../types.ts";
 
-// Esta función maneja una solicitud para agregar un nuevo Business.
 export const getAllBusiness = async (
   req: Request,
   res: Response<Business[] | { error: unknown }>,

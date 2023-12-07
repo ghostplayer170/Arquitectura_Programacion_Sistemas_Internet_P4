@@ -2,7 +2,6 @@
 // @ts-ignore
 
 import { Request, Response } from "npm:express@4.18.2";
-// Esta función maneja una solicitud para agregar un nuevo Worker.
 import { WorkerModel } from "../db/schemas/worker.ts";
 
 export const deleteWorker = async (

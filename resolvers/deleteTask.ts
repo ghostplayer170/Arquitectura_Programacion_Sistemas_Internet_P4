@@ -2,7 +2,6 @@
 // @ts-ignore
 
 import { Request, Response } from "npm:express@4.18.2";
-// Esta función maneja una solicitud para agregar un nuevo Task.
 import { TaskModel } from "../db/schemas/task.ts";
 
 export const deleteTask = async (

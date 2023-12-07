@@ -1,6 +1,9 @@
 import mongoose from "npm:mongoose@7.6.3";
 import { Worker } from "../../types.ts";
-import { WorkerPostDelete, WorkerPostSave } from "../middlewares/middlewareWorker.ts";
+import {
+  WorkerPostDelete,
+  WorkerPostSave,
+} from "../middlewares/middlewareWorker.ts";
 
 export type WorkerModelType =
   & mongoose.Document
@@ -27,15 +30,9 @@ const WorkerSchema = new Schema(
   },
 );
 
-WorkerSchema.post(
-  ["save"],
-  WorkerPostSave,
-);
-WorkerSchema.post(
-  ["findOneAndUpdate"],
-  WorkerPostSave,
-);
-WorkerSchema.post(["findOneAndDelete"], WorkerPostDelete);
+WorkerSchema.post("save", WorkerPostSave);
+WorkerSchema.post("findOneAndUpdate", WorkerPostSave);
+WorkerSchema.post("findOneAndDelete", WorkerPostDelete);
 
 export const WorkerModel = mongoose.model<WorkerModelType>(
   "Worker",

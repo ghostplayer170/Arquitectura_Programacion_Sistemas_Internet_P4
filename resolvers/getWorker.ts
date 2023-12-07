@@ -5,7 +5,6 @@ import { Request, Response } from "npm:express@4.18.2";
 import { WorkerModel } from "../db/schemas/worker.ts";
 import { Worker } from "../types.ts";
 
-// Esta función maneja una solicitud para agregar un nuevo Worker.
 export const getWorker = async (
   req: Request<{ id: string }>,
   res: Response<Worker | { error: unknown }>,
