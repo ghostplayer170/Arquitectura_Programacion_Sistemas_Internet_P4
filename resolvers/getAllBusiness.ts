@@ -11,7 +11,7 @@ export const getAllBusiness = async (
   res: Response<Business[] | { error: unknown }>,
 ) => {
   try {
-    const Business = await BusinessModel.find({}).exec();
+    const Business = await BusinessModel.find({}).populate('workersIDs','tasksIDs').exec();
     if (!Business) {
       res.status(404).send({ error: "Business not found" });
       return;

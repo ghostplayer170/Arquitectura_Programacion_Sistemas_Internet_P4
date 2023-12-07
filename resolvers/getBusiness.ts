@@ -12,7 +12,7 @@ export const getBusiness = async (
 ) => {
   const id = req.params.id;
   try {
-    const Business = await BusinessModel.findById(id).exec();
+    const Business = await BusinessModel.findById(id).populate('workersIDs','tasksIDs').exec();
     if (!Business) {
       res.status(404).send({ error: "Business not found" });
       return;
