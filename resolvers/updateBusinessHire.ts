@@ -4,7 +4,7 @@ import { Business } from "../types.ts";
 import { WorkerModel } from "../db/schemas/worker.ts";
 
 export const updateBusinessHire = async (
-  req: Request<{ id: string; workerId: string }>,
+  req: Request,
   res: Response<Business | { error: unknown }>,
 ) => {
   const id = req.params.id;
